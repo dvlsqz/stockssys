@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+ stockssys-code:
+  build:
+   context: ./
+   dockerfile: Dockerfile
+  ports:
+   - 8000:80
+  volumes:
+   - ./code-dev:/var/www
+   - ./code-dev/public:/var/www/html
+  networks:
+   stockssys_net:
+    ipv4_address: 172.23.100.10
+volumes:
+ code-dev:
+networks:
+ stockssys_net:
+  driver: bridge
+  ipam:
+   driver: default
+   config:
+    -
+     subnet: 172.23.100.0/24
